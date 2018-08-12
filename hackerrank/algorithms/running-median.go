@@ -119,8 +119,6 @@ func main() {
 		fmt.Scanf("%d", &n)
 		m.Push(n)
 		fmt.Printf("%.1f\n", m.Median())
-		//	fmt.Println(n, m.maxHeap, m.minHeap)
-		//		fmt.Println("\t====\n")
 	}
 
 }
