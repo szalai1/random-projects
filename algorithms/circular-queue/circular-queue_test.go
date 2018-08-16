@@ -6,7 +6,7 @@ import (
 )
 
 func TestCircularQueue(t *testing.T) {
-	q := Constructor(3)
+	q := NewMyCircularQueue(3)
 	if !q.EnQueue(1) {
 		t.Error("there should be space for this operation")
 	}
@@ -41,7 +41,7 @@ func TestCircularQueue(t *testing.T) {
 }
 
 func TestComplex(t *testing.T) {
-	q := Constructor(81)
+	q := NewMyCircularQueue(81)
 	q.EnQueue(69)
 	log.Printf("Enqueue 69: %v", q)
 	q.DeQueue()
