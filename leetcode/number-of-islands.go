@@ -4,7 +4,7 @@ import "fmt"
 
 func numIslands(grid [][]byte) int {
 	if len(grid) == 0 {
-		return 0
+		return
 	}
 	n := len(grid)
 	m := len(grid[0])
