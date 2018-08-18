@@ -35,9 +35,6 @@ func (h *MinHeap) Pop() interface{} {
 type DisjointSet map[int32]int32
 
 func (d DisjointSet) Union(a, b int32) {
-	if a > b {
-		a, b = b, a
-	}
 	if d.Find(a) != d.Find(b) {
 		d[d.Find(a)] = d.Find(b)
 	}
