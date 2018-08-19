@@ -8,7 +8,7 @@ func pivotIndex(nums []int) int {
 	}
 	rollingSum := 0
 	for i := 0; i < len(nums); i++ {
-		if rollingSum == sum-rollingSum-nums[i] {
+		if rollingSum<<1 == sum-nums[i] {
 			return i
 		}
 		rollingSum += nums[i]
