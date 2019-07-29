@@ -12,24 +12,15 @@ function [J grad] = nnCostFunction(nn_params, ...
 % 
 %   The returned parameter grad should be a "unrolled" vector of the
 %   partial derivatives of the neural network.
-%
-
-% Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
-% for our 2 layer neural network
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
 Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
                  num_labels, (hidden_layer_size + 1));
-
-% Setup some useful variables
 m = size(X, 1);
-         
-% You need to return the following variables correctly 
 J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
-
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
@@ -38,8 +29,8 @@ Theta2_grad = zeros(size(Theta2));
 %         variable J. After implementing Part 1, you can verify that your
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
-h1 = sigmoid([ones(m, 1) X] * Theta1');
-h2 = sigmoid([ones(m, 1) h1] * Theta2');
+a2 = sigmoid([ones(m, 1) X] * Theta1');
+a3 = sigmoid([ones(m, 1) a2] * Theta2');
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -54,20 +45,14 @@ h2 = sigmoid([ones(m, 1) h1] * Theta2');
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %
-y
-X
-Theta1;
-Theta2;
-%delta_1 = (delta_2*Theta2) 
-%delta_1 = delta_1 .* (1-h1) .* h1
-%h2
 for i = 1:m; 
-   delta_2 = h2(i,:) - y(i,:)
-   delta_1 = (delta_2*Theta2) .* h1(i,:) .* (1-h1(i,:));
-   Theta1_grad += (delta_1*h1(i))
+   a1 = X(i, :)
+   delta_3 = a3(i,:) - y(i,:);
+   delta_2 = (Theta2'*delta_3') .* a2(i,:) .* (1-a2(i,:));
+   Theta1_grad += ((delta_2')*a2(i)')
    size(delta_2)
    size(h2(i,:))
-   Theta2_grad += delta_2*h2(i)
+   Theta2_grad += delta_2*a3(i)
 endfor
 %J += sum(Theta1) + sum(Theta2)
 %
