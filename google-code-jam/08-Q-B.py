@@ -45,9 +45,8 @@ def main():
             a_trains.append((t2, -1))
             b_trains.append((t1, 1))
 
-        a_trains.sort(key = lambda x: x[0] + 0.5*x[1])
-        b_trains.sort(key = lambda x: x[0] + 0.5*x[1])
-
+        a_trains.sort(key = lambda x: x[0] + 0.1*x[1])
+        b_trains.sort(key = lambda x: x[0] + 0.1*x[1])
         a_max = 0
         a_current = 0
         for x in a_trains:
