@@ -39,18 +39,37 @@ def print_ans(case_counter, ans):
 def print_ans_2(case_counter, ans1, ans2):
     print("Case #{case}: {ans1} {ans2}".format(case=case_counter+1, ans1=ans1, ans2=ans2))
 
+def print_ans_3(case_counter, ans1, ans2, ans3):
+    print("Case #{case}: {ans1} {ans2} {ans3}".format(case=case_counter+1, ans1=ans1, ans2=ans2, ans3=ans3))
+
+
 def main():
-    T, W = read_2_ints()
+    T = read_int()
     for case in range(T):
-        nums = []
-        for i in range(W):
-            print(i+1)
-            nums.append(read_int())
-        for i in range(len(nums)-1, 0, -1):
-            nums[i] -= nums[i-1]
-        print(nums)
-        for i in range(len(nums)-1, 0, -1):
-            nums[i] /= math.pow(i+1, 2)
-        print(", ".join(str(x) for x in nums))
+        N = read_int()
+        times = []
+        for i in range(N):
+            a,b = read_2_ints()
+            times.append((a,b,i))
+        times = sorted(times, key=lambda x: x[0])
+        J = 0
+        C = 0
+        res = [None]*N
+        for i in times:
+            if J <= i[0]:
+                J = i[1]
+                res[i[2]] = 'J'
+            elif C <= i[0]:
+                C = i[1]
+                res[i[2]] = 'C'
+            else:
+                res = None
+                break
+        if res:
+            print_ans(case, "".join(res))
+        else:
+            print_ans(case, "IMPOSSIBLE")
+
+
 
 main()

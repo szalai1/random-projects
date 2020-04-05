@@ -39,18 +39,30 @@ def print_ans(case_counter, ans):
 def print_ans_2(case_counter, ans1, ans2):
     print("Case #{case}: {ans1} {ans2}".format(case=case_counter+1, ans1=ans1, ans2=ans2))
 
+def print_ans_3(case_counter, ans1, ans2, ans3):
+    print("Case #{case}: {ans1} {ans2} {ans3}".format(case=case_counter+1, ans1=ans1, ans2=ans2, ans3=ans3))
+
 def main():
-    T, W = read_2_ints()
+    T = read_int()
     for case in range(T):
-        nums = []
-        for i in range(W):
-            print(i+1)
-            nums.append(read_int())
-        for i in range(len(nums)-1, 0, -1):
-            nums[i] -= nums[i-1]
-        print(nums)
-        for i in range(len(nums)-1, 0, -1):
-            nums[i] /= math.pow(i+1, 2)
-        print(", ".join(str(x) for x in nums))
+        N = read_int()
+        num_of_not_u_row = 0
+        num_of_not_u_columns = 0
+        tracking_cols = [set({}) for _ in range(N)]
+        col_flags = [0] * N
+        trace = 0
+        for n in range(N):
+            row = map(lambda x: int(x), read_str().split(" "))
+            if len(row) != len(set(row)):
+                num_of_not_u_row += 1
+            for nn in range(N):
+                if nn == n:
+                    trace += row[nn]
+                if row[nn] in tracking_cols[nn]:
+                    col_flags[nn] = 1
+                else:
+                    tracking_cols[nn].add(row[nn])
+
+        print_ans_3(case, trace, num_of_not_u_row, sum(col_flags))
 
 main()
