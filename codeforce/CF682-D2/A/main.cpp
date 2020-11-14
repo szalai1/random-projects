@@ -15,6 +15,5 @@ int main() {
             else
                 cout << " ";
         }
-
     }
 }
