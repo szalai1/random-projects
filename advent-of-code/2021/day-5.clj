@@ -1,18 +1,18 @@
 (require '[clojure.string :as st])
 
 (def input
-  (->>
-     (slurp "./resources/5.txt")
+  (->> slurp "./resources/5.txt")
      st/split-lines
      (mapcat #(st/split % #"( -> |,)"))
      (map #(Integer/parseInt %))
      (partition 4 4)))
 
+ (defn coordinate-range [[a b]]
+   (let [direction (if (> a b) -1 1)]
+     (range a (+ b direction) direction )))
+
 (defn generate-line [x1 y1 x2 y2]
-  (let [coordinate-range (fn [[a b]]
-                           (let [direction (if (> a b) -1 1)]
-                             (range a (+ b direction) direction )))
-        x (coordinate-range [x1 x2])
+  (let [x (coordinate-range [x1 x2])
         y (coordinate-range [y1 y2])]
     (if (or (= x1 x2) (= y1 y2))
       (if (= 1 (count x))
