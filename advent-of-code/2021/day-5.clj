@@ -1,7 +1,7 @@
 (require '[clojure.string :as st])
 
 (def input
-  (->> slurp "./resources/5.txt")
+  (->> (slurp "./resources/5.txt")
      st/split-lines
      (mapcat #(st/split % #"( -> |,)"))
      (map #(Integer/parseInt %))
