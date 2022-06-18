@@ -20,8 +20,10 @@
        (map #(partition 5 5 %))))
 
 (defn bingo-for-rows?  [board]
-  (reduce #(or %1 (= %2 [:x :x :x :x :x])) false board))
+  (reduce #(or %1 (= %2 [:x :x :x :x :x])) false board)) 
 
+
+(defn transpose [x])
 (defn bingo? [board]
   (or
     (bingo-for-rows? (transpose board))
