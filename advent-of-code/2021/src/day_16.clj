@@ -87,7 +87,6 @@
         packet-version (bits-to-decimal packet-version-bits)
         [type-id rest-bits] (split-at 3 rest-bits)
         type-id (bits-to-decimal type-id)]
-    #_(debug-prn  packet-version packet-version-bits type-id bits)
     (if (= type-id 4)
       (let [[literal-packet rest-bits] (get-literal-packet rest-bits)
             literal (bits-to-decimal literal-packet)]
