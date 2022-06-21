@@ -128,6 +128,25 @@
     (reduce + (:version packet)
             (map sum-version (:packets packet)))))
 
-(prn "first start:" (sum-version (parse-raw-packet puzzle-input)))
 
+(defn evaluate-packet [p]
+  (let [typ (:type p)]
+    (if (= typ 4)
+      (:literal p)
+      (let [vals (map evaluate-packet (:packets p))
+            res (case typ
+                  0 (reduce + vals)
+                  1 (reduce * vals)
+                  2 (apply min vals)
+                  3 (apply max vals)
+                  5 (if (> (first vals) (second vals))
+                      1 0)
+                  6 (if (< (first vals) (second vals))
+                      1 0)
+                  7 (if (= (first vals) (second vals))
+                      1 0))]
+        res))))
+
+(prn "first star:" (sum-version (parse-raw-packet puzzle-input)))
+(prn "second star:" (evaluate-packet (parse-raw-packet puzzle-input)))
 
