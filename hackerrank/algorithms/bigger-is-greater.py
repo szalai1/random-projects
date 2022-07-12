@@ -11,7 +11,6 @@ def biggerIsGreater(w):
             for j in range(i, len(w)):
                 if w[j] > w[i-1] and w[minmax] > w[j]:
                     minmax=j
-            print(w[minmax], w[i-1])
             w[minmax], w[i-1] = w[i-1], w[minmax]
             return "".join(list(w[0:i]) + list(sorted(w[i:])))
     return "no answer" 
