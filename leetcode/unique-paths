@@ -1,0 +1,8 @@
+from math import factorial
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        m_f = int(factorial(m-1))
+        n_f = int(factorial(n-1))
+        mn_f = int(factorial(m+n-2))
+        return int(mn_f/m_f/n_f)
