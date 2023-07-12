@@ -2,7 +2,7 @@
   (:require [reagent.core :refer [atom]]
              ["@viz-js/viz" :as viz]))
 
-(defonce app-state (atom {:count 0}))
+(defonce app-state (atom {:input-data "digraph { a -> b }"}))
 
 (defonce viz-obj (atom nil))
 
