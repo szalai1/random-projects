@@ -1,12 +1,12 @@
 (ns app.core
-  (:require [reagent.core :as r]
+  (:require [reagent.dom :as rd]
             [app.views :as views]
             [app.state :refer [init-state]]))
 
 (defn ^:dev/after-load start
   []
   (init-state)
-  (r/render-component [views/app]
+  (rd/render [views/app]
                       (.getElementById js/document "app")))
 
 (defn ^:export main

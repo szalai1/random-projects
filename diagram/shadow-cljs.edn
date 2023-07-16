@@ -2,7 +2,8 @@
 
  :dependencies [[binaryage/devtools "0.9.10"]
                 [proto-repl "0.3.1"]
-                [reagent "0.8.1"]
+                [cljstache "2.0.6"]
+                [reagent "1.2.0"]
                 ]
 
  :nrepl        {

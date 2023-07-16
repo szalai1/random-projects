@@ -1,6 +1,6 @@
 (ns app.views
   (:require [app.state :refer [app-state viz-obj]]
-            [app.events :refer [increment decrement]]
+            [cljstache.core :refer [render]]
             ))
 
 (defn renderSVG [^js/viz.Viz viz-o dot]
@@ -8,32 +8,61 @@
                  (catch :default e (js/console.log e)))]
     (if (empty? res) "not a valid graph" res)))
 
+
+(defn generate-dot [data]
+  (let [nodes (->> (:nodes data)
+                   (map (fn [n] (str (:id n) " [label=\"" (:label n) "\"]")))
+                   (clojure.string/join "\n"))]
+    (render 
+     "digraph {
+       {{nodes}}
+      }" #js {:nodes nodes})))
+
+
+
 (defn viz-canvas []
     (let [viz-o @viz-obj
-          input-data (:input-data @app-state)]
-    [:div
+          input-data (:input-data @app-state)
+          dot-str (generate-dot input-data)
+          svg-str (renderSVG viz-o dot-str)]
+    [:div 
      (if (nil? viz-o)
        [:p "viz-o not rendered"]
        [:div {:dangerouslySetInnerHTML 
-              {:__html (renderSVG viz-o input-data)}}]
+              {:__html svg-str }}]
        )]))
  
 
-(defn text-input []
-  [:div
-   [:textarea.border-solid.border-2.border-gray-900
-    {:cols "60" :rows "200" 
-               :on-change 
-               #(swap! app-state assoc :input-data (.. % -target -value))
-               :default-value (:input-data @app-state)
-               }]
-   ])
+(defn data-view []
+  (let [input-data (with-out-str (cljs.pprint/pprint (:input-data @app-state)))]
+    [:div.border-solid.border-2.border-gray-900.flex
+     [:textarea.font-mono.flex {:rows 20 :cols 40 } input-data]]))
+(with-out-str (cljs.pprint/pprint (:input-data @app-state)))
 
+(let [config {}
+      input-data {
+  :nodes [
+          {:id "axx" :label "xxxa"} 
+          {:id "b" :label "b"}
+          {:id "c" :label "cica"}
+          {:id "x" :label "cica"}
+          ]
+  :edges [{:from "a" :to "b"}]
+}]
+  (swap! app-state assoc :input-data  input-data))
+
+
+(defn dot-view []
+  (let [dot-str (generate-dot (:input-data @app-state))]
+    [:div.border-solid.border-2.border-gray-900.flex-auto
+     [:pre dot-str]]))
 
 (defn app []
     [:div.container.flex.px-12
-    [:div.break-after-column.flex [text-input]]
-     [:div.flex-auto [viz-canvas]]
+     [:div.felx 
+    [:div.flex [data-view]]
+     [:div.break-after-column.flex [dot-view]]]
+     [:div.flex-auto.border-4 [viz-canvas]]
      ]
     )
 

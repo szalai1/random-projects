@@ -1,12 +1,6 @@
 (ns app.events
   (:require [app.state :refer [app-state]]))
 
-(defn increment
-  [event]
-  (.preventDefault event)
-  (swap! app-state update-in [:count] inc))
+(defn input-changes [input] 
+  (swap! app-state assoc :input-data input))
 
-(defn decrement
-  [event]
-  (.preventDefault event)
-  (swap! app-state update-in [:count] dec))
