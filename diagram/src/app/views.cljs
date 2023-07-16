@@ -11,12 +11,16 @@
 
 (defn generate-dot [data]
   (let [nodes (->> (:nodes data)
-                   (map (fn [n] (str (:id n) " [label=\"" (:label n) "\"]")))
-                   (clojure.string/join "\n"))]
-    (render 
-     "digraph {
-       {{nodes}}
-      }" #js {:nodes nodes})))
+                   (map (fn [n]
+                          (render "\t{{id}} [label={{label}}]"
+                         {:id (:id n) :label (:label n)} )))
+                   (clojure.string/join "\n"))
+        dot-str (render
+         "digraph {
+        {{nodes}}
+          }"  {:nodes nodes})]
+      dot-str
+    ))
 
 
 
@@ -36,7 +40,7 @@
 (defn data-view []
   (let [input-data (with-out-str (cljs.pprint/pprint (:input-data @app-state)))]
     [:div.border-solid.border-2.border-gray-900.flex
-     [:textarea.font-mono.flex {:rows 20 :cols 40 } input-data]]))
+     [:textarea.font-mono.flex {:rows 20 :cols 40 :default-value input-data }  ]]))
 (with-out-str (cljs.pprint/pprint (:input-data @app-state)))
 
 (let [config {}
@@ -51,6 +55,7 @@
 }]
   (swap! app-state assoc :input-data  input-data))
 
+(generate-dot (:input-data @app-state))
 
 (defn dot-view []
   (let [dot-str (generate-dot (:input-data @app-state))]
