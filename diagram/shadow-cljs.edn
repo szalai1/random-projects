@@ -4,6 +4,7 @@
                 [proto-repl "0.3.1"]
                 [cljstache "2.0.6"]
                 [reagent "1.2.0"]
+                [dorothy "0.0.7"]
                 ]
 
  :nrepl        {

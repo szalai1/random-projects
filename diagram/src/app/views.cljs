@@ -1,6 +1,7 @@
 (ns app.views
   (:require [app.state :refer [app-state viz-obj]]
             [cljstache.core :refer [render]]
+            [dorothy.core :as viz]
             ))
 
 (defn renderSVG [^js/viz.Viz viz-o dot]
@@ -12,16 +13,10 @@
 (defn generate-dot [data]
   (let [nodes (->> (:nodes data)
                    (map (fn [n]
-                          (render "\t{{id}} [label={{label}}]"
-                         {:id (:id n) :label (:label n)} )))
-                   (clojure.string/join "\n"))
-        dot-str (render
-         "digraph {
-        {{nodes}}
-          }"  {:nodes nodes})]
+                         [(:id n) {:label (:label n)}] )))
+        dot-str  (viz/dot (viz/digraph [nodes]))]
       dot-str
     ))
-
 
 
 (defn viz-canvas []
@@ -46,7 +41,7 @@
 (let [config {}
       input-data {
   :nodes [
-          {:id "axx" :label "xxxa"} 
+          {:id "a1xx" :label "xxxa"} 
           {:id "b" :label "b"}
           {:id "c" :label "cica"}
           {:id "x" :label "cica"}
