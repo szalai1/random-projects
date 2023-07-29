@@ -1,0 +1,139 @@
+; Jacking in...
+; Connecting using "Babashka" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Starting Jack-in Terminal: pushd /Users/szalaipeter/workspace/random-projects/text-finger-print ; bb --nrepl-server 49539 ; popd
+; Using host:port 127.0.0.1:49539 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+clj꞉user꞉> 
+; Jack-in done.
+clj꞉user꞉> 
+; nREPL Connection was closed
+; Connecting using "ClojureScript nREPL Server" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Connecting ...
+; Reading port file: file:///Users/szalaipeter/workspace/random-projects/text-finger-print/.nrepl-port ...
+; No nrepl port file found.
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉playground꞉> 
+clj꞉playground꞉> 
+; Creating cljs repl session...
+; Connecting cljs repl: ClojureScript nREPL Server...
+;   The Calva Connection Log might have more connection progress information.
+; Connected session: cljs
+; TIPS: You can choose which REPL to use (clj or cljs):
+;    *Calva: Toggle REPL connection*
+;    (There is a button in the status bar for this)
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.cljs'
+nil
+cljs꞉playground꞉> 
+#'playground/main
+cljs꞉playground꞉> 
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+cljs꞉playground꞉> 
+; "#error {:message \"Could not resolve symbol: state\", :data {:type :sci/error, :line 1, :column 6, :message \"Could not resolve symbol: state\", :sci.impl/callstack #object[cljs.core.Volatile {:val ({:line 1, :column 1, :ns #object[To user], :file nil} {:line 1, :column 1, :ns #object[To user], :file nil, :sci.impl/f-meta {:ns #object[To clojure.core], :macro true, :sci/built-in true, :name ->, :arglists ([x & forms]), :doc \"Threads the expr through the forms. Inserts x as the\\n  second item in the first form, making a list of it if it is not a\\n  list already. If there are more forms, inserts the first form as the\\n  second item in second form, etc.\"}} {:line 2, :column 5, :ns #object[To user], :file nil} {:line 2, :column 5, :ns #object[To user], :file nil, :sci.impl/f-meta nil} {:line 1, :column 5, :ns #object[To user], :file nil} {:line 1, :column 6, :ns #object[To user], :file nil} {:line 1, :column 6, :ns #object[To user], :file nil, :sci.impl/f-meta nil})}], :file nil, :phase \"analysis\"}, :cause #error {:message \"Could not resolve symbol: state\", :data {:type :sci/error, :line 2, :column 5, :file nil, :phase \"analysis\"}}}"
+cljs꞉user꞉> 
+["/[\\s\\n]/"]
+cljs꞉playground꞉> 
+["/\\n/"]
+cljs꞉playground꞉> 
+["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."]
+cljs꞉playground꞉> 
+["Lorem" "ipsum" "dolor" "sit" "amet," "consectetur" "adipiscing" "elit," "sed" "do" "eiusmod" "tempor" "incididunt" "ut" "labore" "et" "dolore" "magna" "aliqua." "Ut" "enim" "ad" "minim" "veniam," "quis" "nostrud" "exercitation" "ullamco" "laboris" "nisi" "ut" "aliquip" "ex" "ea" "commodo" "consequat." "Duis" "aute" "irure" "dolor" "in" "reprehenderit" "in" "voluptate" "velit" "esse" "cillum" "dolore" "eu" "fugiat" "nulla" "pariatur." "Excepteur" "sint" "occaecat" "cupidatat" "non" "proident," "sunt" "in" "culpa" "qui" "officia" "deserunt" "mollit" "anim" "id" "est" "laborum."]
+cljs꞉playground꞉> 
+; "#error {:message \"Could not resolve symbol: count-possible-marks\", :data {:type :sci/error, :line 1, :column 1, :message \"Could not resolve symbol: count-possible-marks\", :sci.impl/callstack #object[cljs.core.Volatile {:val ({:line 1, :column 1, :ns #object[To playground], :file nil})}], :file nil, :phase \"analysis\"}, :cause #error {:message \"Could not resolve symbol: count-possible-marks\", :data {:type :sci/error, :line 1, :column 1, :file nil, :phase \"analysis\"}}}"
+cljs꞉playground꞉> 
+#'playground/count-possible-marks
+cljs꞉playground꞉> 
+2
+cljs꞉playground꞉> 
+""
+cljs꞉playground꞉> 
+; "#error {:message \"Could not resolve symbol: clojure.core/split\", :data {:type :sci/error, :line 3, :column 21, :message \"Could not resolve symbol: clojure.core/split\", :sci.impl/callstack #object[cljs.core.Volatile {:val ({:line 1, :column 1, :ns #object[To playground], :file nil} {:line 1, :column 1, :ns #object[To playground], :file nil, :sci.impl/f-meta {:ns #object[To clojure.core], :macro true, :sci/built-in true, :name defn, :arglists ([name doc-string? attr-map? [params*] prepost-map? body] [name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?]), :doc \"Same as (def name (core/fn [params* ] exprs*)) or (def\\n    name (core/fn ([params* ] exprs*)+)) with any doc-string or attrs added\\n    to the var metadata. prepost-map defines a map with optional keys\\n    :pre and :post that contain collections of pre or post conditions.\"}} {:line 1, :column 1, :ns #object[To playground], :file nil} {:sci.impl/fn {:macro nil, :fn-name mark-text}, :ns #object[To playground], :file nil} {:sci.impl/fn {:macro nil, :fn-name mark-text}, :ns #object[To playground], :file nil, :sci.impl/f-meta {:ns #object[To clojure.core], :macro true, :sci/built-in true, :name fn, :arglists ([& sigs]), :doc \"params => positional-params* , or positional-params* & next-param\\n  positional-param => binding-form\\n  next-param => binding-form\\n  name => symbol\\n\\n  Defines a function\"}} {:sci.impl/fn {:macro nil, :fn-name mark-text}, :ns #object[To playground], :file nil} {:line 2, :column 3, :ns #object[To playground], :file nil} {:line 3, :column 9, :ns #object[To playground], :file nil} {:line 3, :column 9, :ns #object[To playground], :file nil, :sci.impl/f-meta {:ns #object[To clojure.core], :macro true, :sci/built-in true, :name let, :arglists ([bindings & body]), :doc \"binding => binding-form init-expr\\n  binding-form => name, or destructuring-form\\n  destructuring-form => map-destructure-form, or seq-destructure-form\\n\\n  Evaluates the exprs in a lexical context in which the symbols in\\n  the binding-forms are bound to their respective init-exprs or parts\\n  therein.\\n\\n  See https://clojure.org/reference/special_forms#binding-forms for\\n  more information about destructuring.\"}} {:line 3, :column 9, :ns #object[To playground], :file nil} {:line 3, :column 21, :ns #object[To playground], :file nil})}], :file nil, :phase \"analysis\"}, :cause #error {:message \"Could not resolve symbol: clojure.core/split\", :data {:type :sci/error, :line 1, :column 1, :file nil, :phase \"analysis\"}}}"
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+#'playground/count-possible-marks
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+6
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+1
+cljs꞉playground꞉> 
+1
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+["Lorem" "ipsum" "dolor" "sit" "amet," "consectetur" "adi"]
+cljs꞉playground꞉> 
+["Lorem" "ipsum" "dolor" "sit" "amet," "consectetur" "adi"]
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+nil
+cljs꞉playground꞉> 
+["Lorem" "ipsum" "dolor" "sit" "amet," "consectetur" "adipiscing" "elit," "sed" "do" "eiusmod" "tempor" "incididunt" "ut" "labore" "et" "dolore" "magna" "aliqua."]
+cljs꞉playground꞉> 
+["Lorem" "ipsum" "dolor" "sit" "amet," "consectetur" "adipiscing" "elit," "sed" "do" "eiusmod" "tempor" "incididunt" "ut" "labore" "et" "dolore" "magna" "aliqua."]
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+"ipsum "
+cljs꞉playground꞉> 
+#'playground/mark-text
+cljs꞉playground꞉> 
+"Lorem ipsum  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+cljs꞉playground꞉> 
+:pre.whitespace-normal
+cljs꞉playground꞉> 
