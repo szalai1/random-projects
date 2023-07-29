@@ -6,7 +6,7 @@
     <script>var SCITTLE_NREPL_WEBSOCKET_PORT = 1340;</script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/scittle@0.6.15/dist/scittle.nrepl.js" type="application/javascript"></script>
-    <script type="application/x-scittle" src="playground.cljs"></script>
+    
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <!-- <script src="js/scittle.re-frame.js" type="application/javascript"></script>
     <script src="js/scittle.reagent.js" type="application/javascript"></script> -->
@@ -26,5 +26,78 @@
   </head>
   <body>
     <div id="app">Not loaded yet</div>
+    <script type="application/x-scittle">
+
+      (ns playground)
+
+      (require '[reagent.core :as r]
+               '[reagent.dom :as rdom])
+      
+      (def state (r/atom {:mark -1 :number-of-words 0 :text ""}))
+      
+      (defn update-text-event [text]
+        (let [num-of-words (count (clojure.string/split text #" "))]
+          (swap! state assoc :text text)
+          (swap! state assoc :number-of-words num-of-words)))
+      
+      (defn update-mark-event [mark]
+        (swap! state assoc :mark (js/parseInt mark)))
+      
+      (update-text-event "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+      
+      (defn count-possible-marks [text]
+        (let [mark-count (:number-of-words @state)]
+          (if (zero? mark-count)
+            0
+            (- mark-count 1))))
+      
+      (defn mark-text
+        [settings text mark]
+        (if (= mark -1)
+          text
+          (if (< mark (count-possible-marks text))
+            (let [words (clojure.string/split text #" ")
+                  markth (str (nth words mark) " ")
+                  words (assoc words mark markth)]
+              (clojure.string/join " " words))
+            nil)))
+      
+      ;;;; views
+      
+      (defn text-input-view []
+        (let [text (:text @state)
+              signed (mark-text {} text (:mark @state))]
+              (js/console.log signed)
+          [:div.flex-auto
+           [:div [:h3 "number of words"]
+            [:p (:number-of-words @state)]]
+      
+           [:textarea.border {:type "text" :rows 10 :cols 80
+                              :default-value text
+                              :on-change #(update-text-event (-> % .-target .-value))}]
+           [:h1.bold "Result"]
+           [:div.whitespace-pre-wrap signed]]))
+      
+      (defn settings-view []
+        [:div.flex-auto
+         [:h1 "Settings"]
+         [:div [:h3 "mark"]
+          [:label {:for "mark"} "mark"]
+          [:input {:id "mark" 
+                   :type "range"
+                   :default-value (:mark @state)
+                   :min -1
+                   :max (count-possible-marks (:text @state))
+                   :on-change #(update-mark-event (-> % .-target .-value))}]]])
+      
+      (defn main []
+        [:div.container.flex 
+         [:div.break-after-column [settings-view]]
+         [text-input-view]])
+      
+      (rdom/render [main] (.getElementById js/document "app"))
+
+    </script>
+
   </body>
 </html>
