@@ -1,8 +1,7 @@
 (ns app.views
   (:require [app.state :refer [app-state viz-obj]]
-            [cljstache.core :refer [render]]
-            [dorothy.core :as viz]
-            ))
+            [app.events :refer [input-changes]]
+            [dorothy.core :as viz]))
 
 (defn renderSVG [^js/viz.Viz viz-o dot]
   (let [res (try (.renderString viz-o dot #js {:format "svg"})
@@ -13,7 +12,7 @@
 (defn generate-dot [data]
   (let [nodes (->> (:nodes data)
                    (map (fn [n]
-                         [(:id n) {:label (:label n)}] )))
+                         [(:id n) n] )))
         dot-str  (viz/dot (viz/digraph [nodes]))]
       dot-str
     ))
@@ -35,22 +34,9 @@
 (defn data-view []
   (let [input-data (with-out-str (cljs.pprint/pprint (:input-data @app-state)))]
     [:div.border-solid.border-2.border-gray-900.flex
-     [:textarea.font-mono.flex {:rows 20 :cols 40 :default-value input-data }  ]]))
-(with-out-str (cljs.pprint/pprint (:input-data @app-state)))
-
-(let [config {}
-      input-data {
-  :nodes [
-          {:id "a1xx" :label "xxxa"} 
-          {:id "b" :label "b"}
-          {:id "c" :label "cica"}
-          {:id "x" :label "cica"}
-          ]
-  :edges [{:from "a" :to "b"}]
-}]
-  (swap! app-state assoc :input-data  input-data))
-
-(generate-dot (:input-data @app-state))
+     [:textarea.font-mono.flex 
+      {:rows 20 :cols 40 :value input-data 
+       :on-change #(input-changes (-> % .-target .-value))}  ]]))
 
 (defn dot-view []
   (let [dot-str (generate-dot (:input-data @app-state))]
