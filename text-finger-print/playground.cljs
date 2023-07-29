@@ -11,20 +11,15 @@
     (swap! state assoc :number-of-words num-of-words)))
 
 (defn update-mark-event [mark]
-
   (swap! state assoc :mark (js/parseInt mark)))
 
 (update-text-event "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-
-;;; state ^  lib  v 
 
 (defn count-possible-marks [text]
   (let [mark-count (:number-of-words @state)]
     (if (zero? mark-count)
       0
       (- mark-count 1))))
-
-
 
 (defn mark-text
   [settings text mark]
@@ -37,8 +32,6 @@
         (clojure.string/join " " words))
       nil)))
 
-(mark-text {} "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-           1)
 ;;;; views
 
 (defn text-input-view []
