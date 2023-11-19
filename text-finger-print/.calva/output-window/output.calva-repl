@@ -138,3 +138,9 @@ cljs꞉playground꞉> 
 :pre.whitespace-normal
 cljs꞉playground꞉> 
 ; nREPL Connection was closed
+; Jacking in...
+; Connecting using "undefined" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+; Aborting jack-in. No project type selected.
