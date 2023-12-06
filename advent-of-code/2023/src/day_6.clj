@@ -1,14 +1,7 @@
-;; Time:        51     92     68     90
-;; Distance:   222   2031   1126   1225
 (def input-data [[51 222] [92 2031] [68 1126] [90 1225]])
-;;Time:      7  15   30
-;;Distance:  9  40  200
-(def input-data [[7 9] [15 40] [30 200]])
 (defn solve-second-order [a b c]
-  (let [d (- (* b b) (* 4 a c))
-        ] 
-    (if (< d 0)
-      nil
+  (let [d (- (* b b) (* 4 a c))] 
+    (if (< d 0) nil
       (let [x1 (/ (+ (- b) (Math/sqrt d)) (* 2 a))
             x2 (/ (- (- b) (Math/sqrt d)) (* 2 a))]
         (if (= x1 x2)
@@ -31,3 +24,6 @@
      (map #(apply solve-one %))
      (reduce *))
 
+;;part 2 
+(def input-data-2 [51926890 222203111261225])
+(apply solve-one input-data-2)
