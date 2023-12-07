@@ -1,6 +1,4 @@
 
-
-
 (def data (-> (slurp "resources/2.txt")
               (clojure.string/split-lines)))
 
