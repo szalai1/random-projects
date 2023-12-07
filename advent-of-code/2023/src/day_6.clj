@@ -1,4 +1,4 @@
-(def input-data [[51 222] [92 2031] [68 1126] [90 1225]])
+
 (defn solve-second-order [a b c]
   (let [d (- (* b b) (* 4 a c))] 
     (if (< d 0) nil
@@ -20,6 +20,7 @@
             (- high-int 
                low-int)))))
 ;; part 1 
+(def input-data [[51 222] [92 2031] [68 1126] [90 1225]])
 (->> input-data 
      (map #(apply solve-one %))
      (reduce *))
