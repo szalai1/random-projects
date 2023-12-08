@@ -6,28 +6,57 @@
 (def left-right (first data))
 
 (defn parse-line [l]
-  (let [letters (re-seq #"[A-Z]{3}" l)]
+  (let [letters (re-seq #"[0-9A-Z]{3}" l)]
     letters))
 
 (def data-map 
   (->> data rest rest 
        (map parse-line)
   (reduce #(assoc %1 (first %2) (rest %2)) {})))
-  
-(count left-right)
 
-(loop [i 0 postion "AAA"]
-  (let [ii (mod i (count left-right))
-        next-step (get left-right ii)
+(defn walk [postion i] 
+  (let [next-step (get left-right (mod i (count left-right)))
         directions (get data-map postion)
         next-postion (if (= next-step \R)
-                      (second directions) 
+                       (second directions)
                        (first directions))]
-    (if (= postion "ZZZ") i
-      (recur (inc i) next-postion))))
+      (lazy-seq (cons next-postion (walk next-postion (+ i 1))))))
+
+;; part 1
+(count (take-while #(not= % "ZZZ") (walk "AAA" 0)))
 
 
 
+(def starting-points (->> data-map keys (filter #(= \A (last %)))))
+
+(defn walk-parallel [postions]
+  (map #(walk % 0) postions))
+
+(def paths (walk-parallel starting-points))
+
+(defn get-loop [path]
+  (loop [p path 
+       seen {}
+       loop []]
+  (let [next (first p)
+        rest (rest p)]
+    (if (contains? seen next)
+      loop
+      (recur rest (assoc seen next true) (conj loop next))))))
 
 
-                                            
+
+(def loop-lengths (->> paths  (map get-loop) (map count)))
+
+(->> paths (map (fn [p] (filter #(= \Z (last %)) p )) ) )
+
+;; things to do 
+;; ---
+;; make walk to return [postion i]
+;; use the the pair to break the loop 
+;; update part 1 to use the new walk
+;; filter for ends with \z and get their index 
+;; calc lcm of the lengths
+;; calc the index until the lcm  
+;; merge the lists and count all the numbers 
+;; get the min that has number of paths frequency -> result
