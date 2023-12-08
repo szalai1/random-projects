@@ -28,8 +28,8 @@
        (sort-by :hand-score)
        (map-indexed #(* (inc %1) (:bet %2)))
        (reduce +)))
-;; part 1
 
+;; part 1
 (evaluate data hand-to-score card-points)
 
 ;; part 2 
