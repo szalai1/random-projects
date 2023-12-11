@@ -20,13 +20,12 @@
         next-postion (if (= next-step \R)
                        (second directions)
                        (first directions))]
-      (lazy-seq (cons next-postion (walk next-postion (+ i 1))))))
+      (lazy-seq (cons [postion i] (walk next-postion (+ i 1))))))
 
 ;; part 1
-(count (take-while #(not= % "ZZZ") (walk "AAA" 0)))
+(-> (take-while #(not= (first %) "ZZZ") (walk "AAA" 0)) last second)
 
-
-
+;; part 2
 (def starting-points (->> data-map keys (filter #(= \A (last %)))))
 
 (defn walk-parallel [postions]
@@ -38,23 +37,31 @@
   (loop [p path 
        seen {}
        loop []]
-  (let [next (first p)
+  (let [[position i] (first p)
+        i (mod i (count left-right))
+        next [position i]
         rest (rest p)]
     (if (contains? seen next)
       loop
       (recur rest (assoc seen next true) (conj loop next))))))
 
 
+(->> paths first (take 5))
+(def loops (->> paths  (map get-loop)))
+(def loop-lengths (->> loops (map count)
 
-(def loop-lengths (->> paths  (map get-loop) (map count)))
 
-(->> paths (map (fn [p] (filter #(= \Z (last %)) p )) ) )
+
+;; (->> loops  
+;;      (map (fn [p] (filter #(= \Z (last (first %))) p )) ) )
+;;      (map #(map second %)) )
+;;      (map #(map count %)))
 
 ;; things to do 
 ;; ---
-;; make walk to return [postion i]
-;; use the the pair to break the loop 
-;; update part 1 to use the new walk
+;; ✅ make walk to return [postion i]
+;; ✅ use the the pair to break the loop 
+;; ✅ update part 1 to use the new walk
 ;; filter for ends with \z and get their index 
 ;; calc lcm of the lengths
 ;; calc the index until the lcm  
