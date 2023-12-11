@@ -48,12 +48,12 @@
 
 (->> paths first (take 5))
 (def loops (->> paths  (map get-loop)))
-(def loop-lengths (->> loops (map count)
+(def loop-lengths (->> loops (map count)))
 
 
 
-;; (->> loops  
-;;      (map (fn [p] (filter #(= \Z (last (first %))) p )) ) )
+(->> loops  
+     (map (fn [p] (filter #(= \Z (last (first %))) p )) ) )
 ;;      (map #(map second %)) )
 ;;      (map #(map count %)))
 
